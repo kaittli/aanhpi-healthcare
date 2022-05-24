@@ -96,7 +96,7 @@ function addChart(){
             legend: { display: true },
             title: {
                 display: true,
-                text: 'Survey Respondants'
+                text: 'Type of Care'
             }
         }
     });
