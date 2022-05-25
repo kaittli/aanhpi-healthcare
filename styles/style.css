@@ -20,7 +20,7 @@ header{
 .main{
     grid-area: main_content;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "main_map content" "joinTheMap .";
+    grid-template-areas: "background aboutProject" "main_map content" "joinTheMap .";
     display: grid;
 }
 
@@ -33,6 +33,14 @@ header{
 #the_map{
     height:80vh;
     grid-area: main_map;
+}
+
+#background{
+    grid-area: background;
+}
+
+#aboutProject{
+    grid-area: aboutProject;
 }
 
 #thePanel{
