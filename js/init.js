@@ -13,6 +13,11 @@ let layers = {
     "Other": other
 }
 
+let mildInjury = 0;
+let intensiveCare = 0;
+let preventativeTreatment = 0;
+let otherCare = 0;
+
 let circleOptions = {
     radius: 6,
     fillColor: "#ff7800",
@@ -43,21 +48,25 @@ function addMarker(data){
         circleOptions.fillColor = "magenta"
         mild.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Mild Injury</h2>`))
         createButtons(data.lat,data.lng,data['What type of medical care are you sharing your experience about?'])
+        mildInjury += 1;
     }
     else if(data['What type of medical care are you sharing your experience about?'] == "Intensive (physical therapy, radiology, etc)"){
         circleOptions.fillColor = "yellow"
         intensive.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Intensive Care</h2>`))
         createButtons(data.lat,data.lng,data['What type of medical care are you sharing your experience about?'])
+        intensiveCare += 1;
     }
     else if(data['What type of medical care are you sharing your experience about?'] == "Preventative (vaccinations, shots, screenings, etc)"){
         circleOptions.fillColor = "cyan"
         preventative.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Preventative Treatment</h2>`))
         createButtons(data.lat,data.lng,data['What type of medical care are you sharing your experience about?'])
+        preventativeTreatment += 1;
     }
     else{
         circleOptions.fillColor = "black"
         other.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Other</h2>`))
         createButtons(data.lat,data.lng,data['What type of medical care are you sharing your experience about?'])
+        otherCare += 1;
     }
     return data
 }
@@ -87,7 +96,7 @@ function addChart(){
             label: "Count",
             backgroundColor: ["green", "red", "blue", "orange"],
             //data: [mild, intensive, preventative, other] //albert: this needs to be summed up values
-            data: [10, 12, 42, 31] //albert: this is just a sample
+            data: [mildInjury, intensiveCare, preventativeTreatment, otherCare] //albert: this is just a sample
             }
         ]
         },
