@@ -86,7 +86,8 @@ function addChart(){
             {
             label: "Count",
             backgroundColor: ["green", "red", "blue", "orange"],
-            data: [mild, intensive, preventative, other]
+            //data: [mild, intensive, preventative, other] //albert: this needs to be summed up values
+            data: [10, 12, 42, 31] //albert: this is just a sample
             }
         ]
         },
@@ -124,6 +125,7 @@ function processData(results){
     other.addTo(map) // add our layers after markers have been made  
     let allLayers = L.featureGroup([mild,intensive,preventative,other]);
     map.fitBounds(allLayers.getBounds());
+    addChart() // albert: you need to call this function after all the markers have been added
 }
 
 loadData(dataUrl)
