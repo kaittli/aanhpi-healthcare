@@ -2,9 +2,15 @@ body{
     display: grid;
     grid-template-rows: auto auto auto;
     grid-template-areas: "header" "main_content" "footer";
-    background-color: rgb(125, 161, 222);
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background-image:  linear-gradient(30deg, #007C92 12%, transparent 12.5%, transparent 87%, #007C92 87.5%, #007C92), linear-gradient(150deg, #007C92 12%, transparent 12.5%, transparent 87%, #007C92 87.5%, #007C92), linear-gradient(30deg, #007C92 12%, transparent 12.5%, transparent 87%, #007C92 87.5%, #007C92), linear-gradient(150deg, #007C92 12%, transparent 12.5%, transparent 87%, #007C92 87.5%, #007C92), linear-gradient(60deg, #007C9277 25%, transparent 25.5%, transparent 75%, #007C9277 75%, #007C9277), linear-gradient(60deg, #007C9277 25%, transparent 25.5%, transparent 75%, #007C9277 75%, #007C9277);
+    background-size: 20px 35px;
+    background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
     gap: 30px;
 }
+
+
 
 header{
     grid-area: header;
