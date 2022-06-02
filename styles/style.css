@@ -1,0 +1,82 @@
+body{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "header" "main_content" "footer";
+    background-color: rgb(125, 161, 222);
+    gap: 30px;
+}
+
+header{
+    grid-area: header;
+    font-size: 4em;
+    justify-self: left;
+    align-self: center;
+}
+
+#footer{
+    grid-area: footer;
+}
+
+.main{
+    grid-area: main_content;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "background aboutProject" "main_map content" "joinTheMap .";
+    display: grid;
+}
+
+#contents{
+    grid-area: content;
+    display: grid;
+    grid-template-areas: "panel";
+}
+
+#the_map{
+    height:80vh;
+    grid-area: main_map;
+}
+
+#background{
+    grid-area: background;
+}
+
+#aboutProject{
+    grid-area: aboutProject;
+}
+
+#thePanel{
+    grid-area: panel; 
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "wordCloud pieCharts" "buttonHome ." "extraStuff .";
+}
+
+#wordCloud{
+    grid-area: wordCloud;
+}
+
+#pieCharts{
+    grid-area: pieCharts;
+}
+
+#extraStuff{
+    grid-area: extraStuff;
+}
+
+#joinTheMap{
+    grid-area: joinTheMap;
+    padding: 15px 32px;
+    margin: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+#joinTheMap a{
+    text-decoration: none; 
+    color: black;
+}
+
+#placeForButtons{
+    grid-area: buttonHome; 
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+}
