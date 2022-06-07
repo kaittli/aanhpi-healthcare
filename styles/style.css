@@ -293,7 +293,6 @@ nav ul#main_menu li:hover::after{
     grid-template-areas: "backgrounds" "about" "impacts" "acknowledgements";
     grid-template-rows: auto auto auto auto;
     gap: 20px;
-
 }
 
 .about-main h3{
@@ -313,49 +312,63 @@ nav ul#main_menu li:hover::after{
 #backgrounds{
     grid-area: backgrounds;
     font-family: 'Mont Heavy', sans-serif;
-    text-align: center;
+    text-align: left;
     /* font-size: 2em; */
+    margin: 2rem;
+    margin-bottom: 0rem;
 }
 #background1{
     grid-area: backgrounds;
-    font-family: 'Mont Heavy', sans-serif;
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    font-style: normal;
     font-size: 16px;
 }
 #about{
     grid-area: about;
     font-family: 'Mont Heavy', sans-serif;
-    text-align: center;
+    text-align: left;
     /* font-size: 2em; */
+    margin: 2rem;
+    margin-bottom: 0rem;
 }
 #about1{
     grid-area: about;
-    font-family: 'Mont Heavy', sans-serif;
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    font-style: normal;
     font-size: 16px;
 }
 
 #impacts{
     grid-area: impacts;
     font-family: 'Mont Heavy', sans-serif;
-    text-align: center;
+    text-align: left;
     /* font-size: 2em; */
+    margin: 2rem;
+    margin-bottom: 0rem;
 }
 #impacts1{
     grid-area: impacts;
-    font-family: 'Mont Heavy', sans-serif;
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    font-style: normal;
     font-size: 16px;
 }
 
 #acknowledgements{
     grid-area: acknowledgements;
     font-family: 'Mont Heavy', sans-serif;
-    text-align: center;
+    text-align: left;
     /* font-size: 2em; */
-    margin-bottom: 10px;
+    margin: 2rem;
+    margin-bottom: 1rem;
 }
 #acknowledgements1{
     grid-area: acknowledgements;
-    font-family: 'Mont Heavy', sans-serif;
-    font-size: 16px;
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    font-style: normal;    font-size: 16px;
 }
 /* ////////// TEAM ////////// */
 .team-main{
