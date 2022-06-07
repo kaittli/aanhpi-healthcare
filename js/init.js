@@ -1,22 +1,43 @@
 // declare variables
 let mapOptions = {'center': [34.0709,-118.444],'zoom':12}
 
+//for chart1
 let mild = L.featureGroup();
 let intensive = L.featureGroup();
 let preventative = L.featureGroup();
 let other = L.featureGroup();
 let asheCenter = L.markerClusterGroup();
 
-// if (data['Have you ever received any kind of medical attention at the Ashe Center before?'] == Yes){
-//     L.circleMarker = L.markerClusterGroup();
-// }
+//for chart2
+let yesAsheLayer = L.markerClusterGroup();
+let noAsheLayer = L.featureGroup();
 
-let layers = {
+//for chart3
+let yesCoverageLayer = L.featureGroup();
+let noCoverageLayer = L.featureGroup();
+
+let extentCareLayers = {
     "Mild Injury": mild,
     "Intensive Care": intensive,
     "Preventative Treatment": preventative,
     "Other": other,
 }
+
+let visitedAsheLayers = {
+    "Yes Ashe": yesAsheLayer,
+    "No Ashe": noAsheLayer,
+}
+
+let coverageLayers = {
+    "Yes coverage": yesCoverageLayer,
+    "No coverage": noCoverageLayer,
+}
+
+// all the layers combined for each chart to add/remove to map
+
+let allCareLayers
+let allvisitedAsheLayers
+let allcoverageLayers
 
 let mildInjury = 0;
 let intensiveCare = 0;
@@ -50,7 +71,9 @@ let Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/to
 Stamen_TonerLite.addTo(map)
 
 // add layer control box
-L.control.layers(null,layers).addTo(map)
+let legendForExtentCare = L.control.layers(null,extentCareLayers).addTo(map);
+let legendForAshe = L.control.layers(null,visitedAsheLayers)
+let legendForCoverage = L.control.layers(null,coverageLayers)
 
 function asheBefore(data){
     if(data['Have you ever received any kind of medical attention at the Ashe Center before?'] == "Yes"){
@@ -85,6 +108,27 @@ function addMarker(data){
     }
 
     if(data.lat != 0){
+    //for Ashe
+        switch(data['Have you ever received any kind of medical attention at the Ashe Center before?']){//['Where did you visit the Ashe Center?']){
+            case "Yes":
+                circleOptions.fillColor = "purple"; //change these depending on yes or no
+                yesAsheLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Have you ever received any kind of medical attention at the Ashe Center before?'], circleOptions))
+            case "No":
+                circleOptions.fillColor = "orange";
+                noAsheLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Have you ever received any kind of medical attention at the Ashe Center before?'], circleOptions))
+        }
+        //for Coverage
+        switch(data['Are you covered by UCSHIP or BruinCare?']){
+            case "Yes":
+                circleOptions.fillColor = "red"; //change these depending on yes or no
+                yesCoverageLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Are you covered by UCSHIP or BruinCare?'], circleOptions))
+            case "No":
+                circleOptions.fillColor = "pink";
+                noCoverageLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Are you covered by UCSHIP or BruinCare?'], circleOptions))
+        }
+    }
+    
+    if(data.lat != 0){
         if((data['Have you ever received any kind of medical attention at the Ashe Center before?'] == "No") || (data.lat != 0)){
             if(data['What type of medical care are you sharing your experience about?'] == "Small (needing ice, bandages, etc)"){
                 circleOptions.fillColor = "#833ab4"
@@ -109,11 +153,13 @@ function addMarker(data){
         console.log("ashe")
         asheCenter.addLayer(L.circleMarker([34.0714005805055,-118.444727043983]))
     }
+
 } 
+let theCharts
 
 function addTreatmentChart(){
     // create the new chart here, target the id in the html called "chart"
-    new Chart(document.getElementById("chartTreatment"), {
+    theCharts = new Chart(document.getElementById("theCharts"), {
         type: 'pie', //can change to 'bar','line' chart or others
         data: {
             // labels for data here
@@ -139,14 +185,14 @@ function addTreatmentChart(){
         }
     });
 }
-
+let secondChart
 function addAsheChart(){
     // create the new chart here, target the id in the html called "chart"
-    new Chart(document.getElementById("chartAshe"), {
+    theCharts = new Chart(document.getElementById("theCharts"), {
         type: 'pie', //can change to 'bar','line' chart or others
         data: {
             // labels for data here
-        labels: ["Yes","No"],
+        labels: ["Visited","Not Visited"],
         datasets: [
             {
             label: "Count",
@@ -168,10 +214,10 @@ function addAsheChart(){
         }
     });
 }
-
+let thirdChart
 function addUCSHIPChart(){
     // create the new chart here, target the id in the html called "chart"
-    new Chart(document.getElementById("chartUCSHIP"), {
+    theCharts = new Chart(document.getElementById("theCharts"), {
         type: 'pie', //can change to 'bar','line' chart or others
         data: {
             // labels for data here
@@ -216,16 +262,148 @@ function processData(results){
         coveredUCSHIP(data)
         addMarker(data)
     })
-    mild.addTo(map) // add our layers after markers have been made
-    intensive.addTo(map) // add our layers after markers have been made  
-    preventative.addTo(map) // add our layers after markers have been made  
-    other.addTo(map) // add our layers after markers have been made  
-    asheCenter.addTo(map)
-    let allLayers = L.featureGroup([mild,intensive,preventative,other, asheCenter]);
-    map.fitBounds(allLayers.getBounds());
-    addTreatmentChart()
-    addAsheChart()
-    addUCSHIPChart()
+    allCareLayers = L.featureGroup([mild,intensive,preventative,other, asheCenter]);
+    allCareLayers.addTo(map)
+    map.fitBounds(allCareLayers.getBounds()); //the other two charts of this is in filter charts
+
 }
 
+//make three buttons on top and have those connect to the pie charts so when you click on a slice, it filters the data on the map, clicking the button will show one pie chart at time
 loadData(dataUrl)
+addEventListeners()
+
+function removeChart(){
+    if (theCharts){
+        theCharts.destroy()
+    }
+}
+
+function removeMapLayers(){
+    // map.removeMapLayers()
+    if (allCareLayers != undefined){
+        allCareLayers.removeLayer()
+        map.removeControl(legendForExtentCare);
+        
+        // legendForExtentCare.addTo(map)
+        
+        //L.control.layers(null,extentCareLayers).removeFrom(map)
+    }
+    if (allvisitedAsheLayers != undefined){
+        allvisitedAsheLayers.removeLayer() //remove legend after this
+        map.removeControl(legendForAshe);
+        // legendForAshe.addTo(map)
+        //L.control.layers(null,visitedAsheLayers).removeFrom(map)
+    }
+    
+    if (allcoverageLayers != undefined){
+        allcoverageLayers.removeLayer()
+        map.removeControl(legendForCoverage);
+        // legendForCoverage.addTo(map)
+        // L.control.layers(null,coverageLayers).removeFrom(map)
+        
+    }
+
+    //look up how to remove L.control layer
+
+}
+
+function filterCharts(e){
+    removeChart()
+    
+    let theChartTarget = e.target.id
+    switch (theChartTarget) {
+        case "extent":
+            addTreatmentChart()
+            allCareLayers.addTo(map) //add legend afterwards
+            break;
+        case "visits":
+            addAsheChart()
+            allvisitedAsheLayers = L.featureGroup([yesAsheLayer,noAsheLayer]);
+            allvisitedAsheLayers.addTo(map)
+            map.fitBounds(allvisitedAsheLayers.getBounds());
+            break;
+        case "coverage":
+            addUCSHIPChart()
+            allcoverageLayers = L.featureGroup([yesCoverageLayer,noCoverageLayer]);
+            allcoverageLayers.addTo(map)
+            map.fitBounds(allcoverageLayers.getBounds());
+            break;
+    }
+}
+
+// all mapLayers
+// allCareLayers
+// allcoverageLayers
+// allvisitedAsheLayers
+
+//legend controls
+// extentCareLayers
+// visitedAsheLayers 
+// coverageLayers 
+
+
+function addEventListeners(){
+    document.getElementById("extent").onclick = function (event) {
+        filterCharts(event)
+        removeMapLayers()
+
+        legendForExtentCare = L.control.layers(null,extentCareLayers).addTo(map)
+        
+    };
+    document.getElementById("visits").onclick = function (event) {
+        filterCharts(event)
+        removeMapLayers()
+        legendForAshe = L.control.layers(null,visitedAsheLayers).addTo(map)
+        
+        map.removeLayer(allCareLayers)
+        if (allvisitedAsheLayers!= undefined){
+            map.removeLayer(allvisitedAsheLayers)
+        }
+        // map.removeLayer(allcoverageLayers)
+        asheCenter.addTo(map)
+    };
+    document.getElementById("coverage").onclick = function(event) {
+        filterCharts(event)
+        removeMapLayers()
+        
+        if (allCareLayers != undefined){
+            map.removeLayer(allCareLayers)
+        }
+        if (visitedAsheLayers != undefined){
+            map.removeLayer(visitedAsheLayers)
+        }
+        legendForCoverage = L.control.layers(null,coverageLayers).addTo(map)
+    };
+}
+
+//event listener for the chart clicks, prob do not have time for this
+// document.getElementById("chartTreatment").onclick = function (evt) {
+//     let activePoints = firstChart.getElementsAtEventForMode(evt, 'point', firstChart.options);
+//     // console.log(activePoints)
+//     let label = firstChart.data.labels[activePoints[0].index];
+//     console.log(label)
+
+//     // change the chart based on the label clicked
+//     // reloadChart(label)
+//     // createloadMap(label)
+// };
+
+// document.getElementById("chartAshe").onclick = function (evt) {
+//     let activePoints = secondChart.getElementsAtEventForMode(evt, 'point', secondChart.options);
+//     // console.log(activePoints)
+//     let label = secondChart.data.labels[activePoints[0].index];
+//     console.log(label)
+
+//     // reloadChart
+//     // createloadMap
+// };
+
+// document.getElementById("chartUCSHIP").onclick = function (evt) {
+//     let activePoints = thirdChart.getElementsAtEventForMode(evt, 'point', secondChart.options);
+//     // console.log(activePoints)
+//     let label = thirdChart.data.labels[activePoints[0].index];
+//     console.log(label)
+
+//     // reloadChart
+//     // createloadMap
+// };
