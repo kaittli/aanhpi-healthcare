@@ -311,8 +311,8 @@ nav ul#main_menu li:hover::after{
 
 #backgrounds{
     grid-area: backgrounds;
-    font-family: 'Mont Heavy', sans-serif;
-    text-align: left;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 800;    text-align: left;
     /* font-size: 2em; */
     margin: 2rem;
     margin-bottom: 0rem;
@@ -326,7 +326,8 @@ nav ul#main_menu li:hover::after{
 }
 #about{
     grid-area: about;
-    font-family: 'Mont Heavy', sans-serif;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 800;
     text-align: left;
     /* font-size: 2em; */
     margin: 2rem;
@@ -342,8 +343,8 @@ nav ul#main_menu li:hover::after{
 
 #impacts{
     grid-area: impacts;
-    font-family: 'Mont Heavy', sans-serif;
-    text-align: left;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 800;    text-align: left;
     /* font-size: 2em; */
     margin: 2rem;
     margin-bottom: 0rem;
@@ -358,8 +359,8 @@ nav ul#main_menu li:hover::after{
 
 #acknowledgements{
     grid-area: acknowledgements;
-    font-family: 'Mont Heavy', sans-serif;
-    text-align: left;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 800;    text-align: left;
     /* font-size: 2em; */
     margin: 2rem;
     margin-bottom: 1rem;
