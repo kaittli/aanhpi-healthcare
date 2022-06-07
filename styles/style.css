@@ -25,7 +25,7 @@ body{
 header{
     display: grid;
     grid-area: header;
-    grid-template-areas: "title navigation";
+    grid-template-areas: "title navigation"; /* no quotation marks inside for columns*/
     grid-template-columns: 1fr 1fr;
     overflow: hidden;
     background-color: #ae62e2; /* #ffd6af; */
@@ -58,6 +58,22 @@ pageTitle h1{
 pageTitle a{
     color: black;
     text-decoration: none;
+}
+
+
+#buttonContainer{
+    display: grid;
+    grid-template-columns: .3fr .3fr .3fr;
+    gap: 10px;
+}
+
+.filterbuttons{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 /* ////////// NAV ////////// */
@@ -163,7 +179,7 @@ nav ul#main_menu li:hover::after{
     font-family: 'Cabin', sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 1.1em;
+    font-size: 1em;
     align-self: center;
     justify-self: center;
     grid-area: panelTitle;
@@ -179,34 +195,26 @@ nav ul#main_menu li:hover::after{
 
 #chartTreatmentContainer{
     grid-area: chartTreatment;
+    position: relative;
+    height: 20vh;
 }
 
 #chartAsheContainer{
     grid-area: chartAshe
+    position: relative;
+    height: 20vh;
 }
 
 #chartUCSHIPContainer{
     grid-area: chartUCSHIP
+    position: relative;
+    height: 20vh;
 }
 
 #extraStuff{
     grid-area: extraStuff;
     align-self: center;
     justify-self: center;
-}
-
-.button{
-    background-color: #ae62e2;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
 }
 
 .button{
@@ -220,6 +228,13 @@ nav ul#main_menu li:hover::after{
     font-weight: 800;
     font-style: normal;
     color: black;
+    padding: 16px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
 .button:hover{
@@ -242,6 +257,7 @@ nav ul#main_menu li:hover::after{
     grid-template-areas: "bullhorn contributionMessage contributionButton";
     grid-template-columns: 1fr 10fr 2fr;
     display: grid;
+    align-items: center;
 }
 
 .joinMapImage{
@@ -272,8 +288,74 @@ nav ul#main_menu li:hover::after{
     border-radius: 15px;
     border: 2px solid black;
     background-color: white;
+    display: grid;
+    grid-template-areas: "backgrounds" "about" "impacts" "acknowledgements";
+    grid-template-rows: auto auto auto auto;
+    gap: 20px;
+
 }
 
+.about-main h3{
+    font-weight: 500;
+    font-size: 2em;
+    margin-bottom: 10px;
+    /* border-bottom: 1px solid black; */
+    text-decoration:underline;
+    text-decoration-color: #ae62e2;
+
+}
+.about-main p{
+    text-align: left;
+    margin: 10px;
+}
+
+#backgrounds{
+    grid-area: backgrounds;
+    font-family: 'Mont Heavy', sans-serif;
+    text-align: center;
+    /* font-size: 2em; */
+}
+#background1{
+    grid-area: backgrounds;
+    font-family: 'Mont Heavy', sans-serif;
+    font-size: 16px;
+}
+#about{
+    grid-area: about;
+    font-family: 'Mont Heavy', sans-serif;
+    text-align: center;
+    /* font-size: 2em; */
+}
+#about1{
+    grid-area: about;
+    font-family: 'Mont Heavy', sans-serif;
+    font-size: 16px;
+}
+
+#impacts{
+    grid-area: impacts;
+    font-family: 'Mont Heavy', sans-serif;
+    text-align: center;
+    /* font-size: 2em; */
+}
+#impacts1{
+    grid-area: impacts;
+    font-family: 'Mont Heavy', sans-serif;
+    font-size: 16px;
+}
+
+#acknowledgements{
+    grid-area: acknowledgements;
+    font-family: 'Mont Heavy', sans-serif;
+    text-align: center;
+    /* font-size: 2em; */
+    margin-bottom: 10px;
+}
+#acknowledgements1{
+    grid-area: acknowledgements;
+    font-family: 'Mont Heavy', sans-serif;
+    font-size: 16px;
+}
 /* ////////// TEAM ////////// */
 .team-main{
     border-radius: 15px;
@@ -311,6 +393,7 @@ nav ul#main_menu li:hover::after{
     background-color: #ae62e2;
     height: 30px;
     border-top: 3px black solid;
+    margin-top: 10px;
 }
 
 #footer-left{
@@ -336,7 +419,7 @@ nav ul#main_menu li:hover::after{
     text-align: right;
 }
 
-/* ////////// CLUTSER MARKERS ////////// */
+/* ////////// CLUSTER MARKERS ////////// */
 .marker-cluster-small {
 	background-color: rgba(181, 226, 140, 0.6);
 	}
@@ -397,3 +480,43 @@ nav ul#main_menu li:hover::after{
 .marker-cluster span {
 	line-height: 30px;
 	}
+
+/* ////////// RESPONSE ////////// */
+
+.title {
+    grid-area: main_content;
+    font-family: 'Mont Heavy', sans-serif;
+    border: 1px solid black;
+    text-align: center;
+    background-color: white;
+    font-size: 1.2em;
+}
+.borders {
+    grid-area: main_content;
+    font-family: 'Mont Heavy', sans-serif;
+    border: 1px solid black;
+    text-align: center;
+    background-color: white;
+    font-size: 0.9em;
+}
+
+table{
+    padding: 25px;
+}
+
+.response-table-title {
+    font-family: 'Mont Heavy', sans-serif;
+    background-color: #dad7d1;
+    padding: 10px;
+    font-size: 3em;
+}
+.response-table-description{
+    font-family: 'Mont Heavy', sans-serif;
+    background-color: #dad7d1;
+    padding: 10px;
+    font-size: 1.5em;
+}
+
+
+
+
