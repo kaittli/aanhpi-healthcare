@@ -258,6 +258,7 @@ nav ul#main_menu li:hover::after{
     grid-template-columns: 1fr 10fr 2fr;
     display: grid;
     align-items: center;
+    justify-items: left;
 }
 
 .joinMapImage{
@@ -273,14 +274,14 @@ nav ul#main_menu li:hover::after{
 }
 
 #joinTheMap img{
-    width: 75px;
+    width: 75%;
 }
 
 #joinTheMap h3{
     font-family: 'Cabin', sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 /* ////////// ABOUT ////////// */
@@ -412,7 +413,7 @@ nav ul#main_menu li:hover::after{
     font-family: 'Cabin', sans-serif;
     font-weight: normal;
     font-style: normal;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 #footer-right p{
