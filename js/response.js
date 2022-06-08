@@ -1,6 +1,6 @@
 const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRIHr3uHd7EcxlEEW1sQLev1UarBfMhcdlV4u5lPM-SDsuqsnjhIwoqM8GmUQoMO-G6MxvY1a6MpgVR/pub?output=csv"
 const ts = "Timestamp";
-const q1 = "Are you satisfied with the quality of care you have received from the Ashe Center? ";
+const q1 = "Are you satisfied with the quality of care you have received from the Ashe Center?";
 const q2 = "Why or why not?";
 const q3 = "If you feel comfortable, could you describe your experience(s) seeking out medical attention at the Ashe Center?";
 const q4 = "Do you think that having UCSHIP and/or BruinCare has facilitated your access to the Ashe Center? Why or why not?";
