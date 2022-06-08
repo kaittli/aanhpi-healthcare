@@ -6,15 +6,17 @@ let mild = L.featureGroup();
 let intensive = L.featureGroup();
 let preventative = L.featureGroup();
 let other = L.featureGroup();
-let asheCenter = L.markerClusterGroup();
+let asheCare = L.markerClusterGroup();
 
 //for chart2
 let yesAsheLayer = L.markerClusterGroup();
 let noAsheLayer = L.featureGroup();
+let asheVisits = L.markerClusterGroup();
 
 //for chart3
 let yesCoverageLayer = L.featureGroup();
 let noCoverageLayer = L.featureGroup();
+let asheCoverage = L.markerClusterGroup();
 
 let extentCareLayers = {
     "Mild Injury": mild,
@@ -24,20 +26,20 @@ let extentCareLayers = {
 }
 
 let visitedAsheLayers = {
-    "Yes Ashe": yesAsheLayer,
-    "No Ashe": noAsheLayer,
+    "Previously Visited Ashe": yesAsheLayer,
+    "Did Not Previously Visit Ashe": noAsheLayer,
 }
 
 let coverageLayers = {
-    "Yes coverage": yesCoverageLayer,
-    "No coverage": noCoverageLayer,
+    "Covered by UCSHIP/BruinCare": yesCoverageLayer,
+    "Not Covered by UCSHIP/BruinCare": noCoverageLayer,
 }
 
 // all the layers combined for each chart to add/remove to map
 
 let allCareLayers
-let allvisitedAsheLayers
-let allcoverageLayers
+let allVisitedAsheLayers
+let allCoverageLayers
 
 let mildInjury = 0;
 let intensiveCare = 0;
@@ -71,7 +73,7 @@ let Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/to
 Stamen_TonerLite.addTo(map)
 
 // add layer control box
-let legendForExtentCare = L.control.layers(null,extentCareLayers).addTo(map);
+let legendForExtentCare = L.control.layers(null,extentCareLayers).addTo(map)
 let legendForAshe = L.control.layers(null,visitedAsheLayers)
 let legendForCoverage = L.control.layers(null,coverageLayers)
 
@@ -93,7 +95,7 @@ function coveredUCSHIP(data){
     }
 }
 
-function addMarker(data){
+function extentOfCare(data){
     if(data['What type of medical care are you sharing your experience about?'] == "Small (needing ice, bandages, etc)"){
         mildInjury += 1;
     }
@@ -106,64 +108,84 @@ function addMarker(data){
     else{
         otherCare += 1;
     }
+}
 
+function addMarker(data){
     if(data.lat != 0){
     //for Ashe
         switch(data['Have you ever received any kind of medical attention at the Ashe Center before?']){//['Where did you visit the Ashe Center?']){
             case "Yes":
-                circleOptions.fillColor = "purple"; //change these depending on yes or no
-                yesAsheLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Have you ever received any kind of medical attention at the Ashe Center before?'], circleOptions))
+                circleOptions.fillColor = "#833ab4"; //change these depending on yes or no
+                yesAsheLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Reason for Choosing Off-Campus Over Ashe: ${data['Is there a reason why you have not sought out medical treatment at the Ashe Center?']}<br/>Experience with Off-Campus Treatment: ${data['How was your experience getting treatment off campus?']}</p>`))
+                break;
             case "No":
-                circleOptions.fillColor = "orange";
-                noAsheLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Have you ever received any kind of medical attention at the Ashe Center before?'], circleOptions))
+                circleOptions.fillColor = "#fcb045";  
+                noAsheLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Reason for Choosing Off-Campus Over Ashe: ${data['Is there a reason why you have not sought out medical treatment at the Ashe Center?']}<br/>Experience with Off-Campus Treatment: ${data['How was your experience getting treatment off campus?']}</p>`))
+                break;
+            default:
+                console.log("ashe")
+                asheVisits.addLayer(L.circleMarker([34.0714005805055,-118.444727043983]))
+                break;
         }
         //for Coverage
         switch(data['Are you covered by UCSHIP or BruinCare?']){
             case "Yes":
-                circleOptions.fillColor = "red"; //change these depending on yes or no
-                yesCoverageLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Are you covered by UCSHIP or BruinCare?'], circleOptions))
+                circleOptions.fillColor = "#fd1d1d"; //change these depending on yes or no
+                yesCoverageLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup('<p>UCSHIP/BruinCare Coverage: Yes</p>'))//data['Are you covered by UCSHIP or BruinCare?'], circleOptions))
+                break;
             case "No":
-                circleOptions.fillColor = "pink";
-                noCoverageLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions))//data['Are you covered by UCSHIP or BruinCare?'], circleOptions))
+                circleOptions.fillColor = "#ff49c5";
+                noCoverageLayer.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup('<p>UCSHIP/BruinCare Coverage: No</p>'))//data['Are you covered by UCSHIP or BruinCare?'], circleOptions))
+                break;
+            default:
+                console.log("ashe")
+                asheCoverage.addLayer(L.circleMarker([34.0714005805055,-118.444727043983]))
+                break;
         }
     }
     
     if(data.lat != 0){
         if((data['Have you ever received any kind of medical attention at the Ashe Center before?'] == "No") || (data.lat != 0)){
-            if(data['What type of medical care are you sharing your experience about?'] == "Small (needing ice, bandages, etc)"){
+            if(data['What type of medical care are you sharing your experience about?'] == "Small ( ice, bandages, etc)"){
                 circleOptions.fillColor = "#833ab4"
-                mild.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Mild Injury<br/>Reason for Choosing Off-Campus Over Ashe: ${data['Is there a reason why you have not sought out medical treatment at the Ashe Center?']}<br/>UCSHIP/BruinCare Coverage: ${data['Are you covered by UCSHIP or BruinCare?']}<br/>Experience with Off-Campus Treatment: ${data['How was your experience getting treatment off campus?']}</p>`))
+                mild.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Mild Injury</p>`))
             }
             else if(data['What type of medical care are you sharing your experience about?'] == "Intensive (physical therapy, radiology, etc)"){
                 circleOptions.fillColor = "#fd1d1d"
-                intensive.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Intensive Care<br/>Reason for Choosing Off-Campus Over Ashe: ${data['Is there a reason why you have not sought out medical treatment at the Ashe Center?']}<br/>UCSHIP/BruinCare Coverage: ${data['Are you covered by UCSHIP or BruinCare?']}<br/>Experience with Off-Campus Treatment: ${data['How was your experience getting treatment off campus?']}</p>`))
+                intensive.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Mild Injury</p>`))
             }
             else if(data['What type of medical care are you sharing your experience about?'] == "Preventative (vaccinations, shots, screenings, etc)"){
                 circleOptions.fillColor = "#fcb045"
-                preventative.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Preventative Treatment<br/>Reason for Choosing Off-Campus Over Ashe: ${data['Is there a reason why you have not sought out medical treatment at the Ashe Center?']}<br/>UCSHIP/BruinCare Coverage: ${data['Are you covered by UCSHIP or BruinCare?']}<br/>Experience with Off-Campus Treatment: ${data['How was your experience getting treatment off campus?']}</p>`))
+                preventative.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Mild Injury</p>`))
             }
             else{
                 circleOptions.fillColor = "#ff49c5"
-                other.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Other Care<br/>Reason for Choosing Off-Campus Over Ashe: ${data['Is there a reason why you have not sought out medical treatment at the Ashe Center?']}<br/>UCSHIP/BruinCare Coverage: ${data['Are you covered by UCSHIP or BruinCare?']}<br/>Experience with Off-Campus Treatment: ${data['How was your experience getting treatment off campus?']}</p>`))
+                other.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<p>Type of Treatment: Mild Injury</p>`))
             }
             return data
         }
     }
     else{
+        // 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
+        // step 1 make sure you add all the right data that you need for the popup (addCorrectPopup)
+        // 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
+        let fullData = {
+            ashExp: data['If you feel comfortable, could you describe your experience(s) seeking out medical attention at the Ashe Center?'],
+            ashReason: data['Is there a reason why you have not sought out medical treatment at the Ashe Center?'],
+        }
         console.log("ashe")
-        asheCenter.addLayer(L.circleMarker([34.0714005805055,-118.444727043983]))
+        asheCare.addLayer(L.circleMarker([34.0714005805055,-118.444727043983],{circleOptions:fullData}))
     }
-
 } 
-let theCharts
 
+let theCharts
 function addTreatmentChart(){
     // create the new chart here, target the id in the html called "chart"
     theCharts = new Chart(document.getElementById("theCharts"), {
         type: 'pie', //can change to 'bar','line' chart or others
         data: {
             // labels for data here
-        labels: ["Mild","Intensive", "Preventative", "Other"],
+        labels: ["Mild", "Intensive", "Preventative", "Other"],
         datasets: [
             {
             label: "Count",
@@ -185,6 +207,7 @@ function addTreatmentChart(){
         }
     });
 }
+
 let secondChart
 function addAsheChart(){
     // create the new chart here, target the id in the html called "chart"
@@ -192,7 +215,7 @@ function addAsheChart(){
         type: 'pie', //can change to 'bar','line' chart or others
         data: {
             // labels for data here
-        labels: ["Visited","Not Visited"],
+        labels: ["Visited", "Not Visited"],
         datasets: [
             {
             label: "Count",
@@ -214,6 +237,7 @@ function addAsheChart(){
         }
     });
 }
+
 let thirdChart
 function addUCSHIPChart(){
     // create the new chart here, target the id in the html called "chart"
@@ -221,7 +245,7 @@ function addUCSHIPChart(){
         type: 'pie', //can change to 'bar','line' chart or others
         data: {
             // labels for data here
-        labels: ["Yes","No"],
+        labels: ["Yes", "No"],
         datasets: [
             {
             label: "Count",
@@ -260,12 +284,46 @@ function processData(results){
         console.log(data)
         asheBefore(data)
         coveredUCSHIP(data)
+        extentOfCare(data)
         addMarker(data)
     })
-    allCareLayers = L.featureGroup([mild,intensive,preventative,other, asheCenter]);
+    // allCareLayers = L.featureGroup([mild,intensive,preventative,other,asheCare]);
+
+    allCareLayers = L.featureGroup([mild,intensive,preventative,other,asheCare]);
+    console.log('🐅🐅🐅🐅🐅')
+    console.log(asheCare)
+    addCorrectPopup() //initially add pops
     allCareLayers.addTo(map)
     map.fitBounds(allCareLayers.getBounds()); //the other two charts of this is in filter charts
 
+}
+
+// get the ashCare to show up all the time ( * / *****)
+// somehow pass in the correct chart to filter the ashCare info
+    // this is to show pop-info
+// bind 
+
+// 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
+// step 2 bind the right pop-up depending filter!!!!!!!!!!!!!!!!!
+// 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
+function addCorrectPopup(filter="firstChart"){
+    asheCare.getLayers().forEach(individualMarker => filterPopupOnChartClick(individualMarker, filter))
+}
+
+
+function filterPopupOnChartClick(popupInCluster,filter){
+    console.log(popupInCluster)
+    switch (filter){
+        
+        case "firstChart":
+            popupInCluster.bindPopup(`<p>Type of Treatment: ${popupInCluster.options.circleOptions.ashExp}</p>`)
+            break;
+        case "secondChart":
+            popupInCluster.bindPopup(`<p>Previously Received Care at the Ashe Center: ${popupInCluster.options.circleOptions.ashReason}</p>`)
+            break;
+        case "thirdChart":
+            break;
+    }    
 }
 
 //make three buttons on top and have those connect to the pie charts so when you click on a slice, it filters the data on the map, clicking the button will show one pie chart at time
@@ -284,29 +342,33 @@ function removeMapLayers(){
         allCareLayers.removeLayer()
         map.removeControl(legendForExtentCare);
         
-        // legendForExtentCare.addTo(map)
-        
+        //legendForExtentCare.addTo(map)
         //L.control.layers(null,extentCareLayers).removeFrom(map)
     }
-    if (allvisitedAsheLayers != undefined){
-        allvisitedAsheLayers.removeLayer() //remove legend after this
+    if (allVisitedAsheLayers != undefined){
+        allVisitedAsheLayers.removeLayer() //remove legend after this
         map.removeControl(legendForAshe);
-        // legendForAshe.addTo(map)
+        //legendForAshe.addTo(map)
         //L.control.layers(null,visitedAsheLayers).removeFrom(map)
     }
     
-    if (allcoverageLayers != undefined){
-        allcoverageLayers.removeLayer()
+    if (allCoverageLayers != undefined){
+        allCoverageLayers.removeLayer()
         map.removeControl(legendForCoverage);
-        // legendForCoverage.addTo(map)
-        // L.control.layers(null,coverageLayers).removeFrom(map)
         
+        //legendForCoverage.addTo(map)
+        //L.control.layers(null,coverageLayers).removeFrom(map)
     }
+    
 
     //look up how to remove L.control layer
 
 }
 
+
+// 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
+// step 3 add set the right filter to the add correct popUp function!!!!!!!!!!!!!!!!!
+// 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
 function filterCharts(e){
     removeChart()
     
@@ -315,18 +377,19 @@ function filterCharts(e){
         case "extent":
             addTreatmentChart()
             allCareLayers.addTo(map) //add legend afterwards
+            
             break;
         case "visits":
             addAsheChart()
-            allvisitedAsheLayers = L.featureGroup([yesAsheLayer,noAsheLayer]);
-            allvisitedAsheLayers.addTo(map)
-            map.fitBounds(allvisitedAsheLayers.getBounds());
+            allVisitedAsheLayers = L.featureGroup([yesAsheLayer,noAsheLayer,asheVisits])
+            allVisitedAsheLayers.addTo(map)
+            map.fitBounds(allVisitedAsheLayers.getBounds())
             break;
         case "coverage":
             addUCSHIPChart()
-            allcoverageLayers = L.featureGroup([yesCoverageLayer,noCoverageLayer]);
-            allcoverageLayers.addTo(map)
-            map.fitBounds(allcoverageLayers.getBounds());
+            allCoverageLayers = L.featureGroup([yesCoverageLayer,noCoverageLayer,asheCoverage])
+            allCoverageLayers.addTo(map)
+            map.fitBounds(allCoverageLayers.getBounds())
             break;
     }
 }
@@ -343,37 +406,60 @@ function filterCharts(e){
 
 
 function addEventListeners(){
-    document.getElementById("extent").onclick = function (event) {
+
+
+    document.getElementById("extent").onclick = function(event){
         filterCharts(event)
         removeMapLayers()
-
         legendForExtentCare = L.control.layers(null,extentCareLayers).addTo(map)
         
+        map.removeLayer(allCoverageLayers)
+        map.removeLayer(allVisitedAsheLayers)
+
+        if (allCoverageLayers != undefined){
+            map.removeLayer(allCoverageLayers)
+        }
+        if (allvisitedAsheLayers!= undefined){
+            map.removeLayer(allVisitedAsheLayers)
+        }
+        map.addLayer(asheCare)
     };
-    document.getElementById("visits").onclick = function (event) {
+    document.getElementById("visits").onclick = function(event){
         filterCharts(event)
         removeMapLayers()
         legendForAshe = L.control.layers(null,visitedAsheLayers).addTo(map)
-        
+
         map.removeLayer(allCareLayers)
-        if (allvisitedAsheLayers!= undefined){
-            map.removeLayer(allvisitedAsheLayers)
-        }
-        // map.removeLayer(allcoverageLayers)
-        asheCenter.addTo(map)
-    };
-    document.getElementById("coverage").onclick = function(event) {
-        filterCharts(event)
-        removeMapLayers()
-        
+        map.removeLayer(allCoverageLayers)
+
         if (allCareLayers != undefined){
             map.removeLayer(allCareLayers)
+            map.addLayer(asheCare)
         }
-        if (visitedAsheLayers != undefined){
-            map.removeLayer(visitedAsheLayers)
+        if (allcoveraCeLayers != undefined){
+            map.removeLayer(allCoverageLayers)
+            map.addLayer(asheCare)
         }
-        legendForCoverage = L.control.layers(null,coverageLayers).addTo(map)
+        map.addLayer(asheCare)
     };
+    document.getElementById("coverage").onclick = function(event){
+        filterCharts(event)
+        removeMapLayers()
+        legendForCoverage = L.control.layers(null,coverageLayers).addTo(map)
+
+        map.removeLayer(allCareLayers)
+        map.removeLayer(allVisitedAsheLayers)
+        map.addLayer(asheCare)
+        if (allCareLayers != undefined){
+            map.removeLayer(allCareLayers)
+            map.addLayer(asheCare)
+        }
+        if (allvisitedAsheLayers!= undefined){
+            map.removeLayer(allVisitedAsheLayers)
+            map.addLayer(asheCare)
+        }      
+    };
+
 }
 
 //event listener for the chart clicks, prob do not have time for this

@@ -568,41 +568,41 @@ nav ul#main_menu li:hover::after{
 	}
 
 /* ////////// RESPONSE ////////// */
-
-.title {
-    grid-area: main_content;
-    font-family: 'Mont Heavy', sans-serif;
-    border: 1px solid black;
-    text-align: center;
+.response-main{
+    border-radius: 15px;
+    border: 2px solid black;
     background-color: white;
-    font-size: 1.2em;
 }
-.borders {
-    grid-area: main_content;
-    font-family: 'Mont Heavy', sans-serif;
+
+.title{
+    font-family: 'Cabin', sans-serif;
+    font-weight: 600;
     border: 1px solid black;
     text-align: center;
-    background-color: white;
+    font-size: 1.2em;
+    padding: 0.5em;
+}
+.borders{
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    border: 1px solid black;
+    text-align: center;
     font-size: 0.9em;
+    padding: 0.5em;
 }
 
 table{
-    padding: 25px;
+    padding: 2em;
 }
 
-.response-table-title {
+.response-table-title{
     font-family: 'Mont Heavy', sans-serif;
-    background-color: #dad7d1;
-    padding: 10px;
+    padding: 0.5em;
     font-size: 3em;
 }
 .response-table-description{
-    font-family: 'Mont Heavy', sans-serif;
-    background-color: #dad7d1;
-    padding: 10px;
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    padding: 0.5em;
     font-size: 1.5em;
 }
-
-
-
-
