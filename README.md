@@ -40,7 +40,7 @@ This mapplication can be used to learn about the sentiments and stories of UCLA 
 
 ## Screenshots of Features of the website 
 1. Home Page
-Our home page contains our main panel, showcasing our mapplication along with buttons and piecharts that are conditional based on what you are interested in seeing!
+Our home page contains our main panel, showcasing our mapplication along with buttons and piecharts that are conditional based on what you are interested in seeing! Specifically, our map has individual markers that when clicked, popup with survey information as well as a cluster marker that provides the ability to view multiple markers in one location. Our control panel can filter criteria to swap information that you are interested in seeing and also contains a button that links to another page with anonymized information. 
 <img src=images/mapplication.png style="width:100%">
 
 2. Response Page
