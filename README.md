@@ -43,8 +43,8 @@ This mapplication can be used to learn about the sentiments and stories of UCLA 
 <img src=images/mapplication.png style="width:100%">
 
 2. Response Page: Our response page contains two charts, the one on top contains responses relevant to the Ashe Center while the one on the bottom contains responses pertaining to other medical centers nearby.
-<img src= images/Screen Shot 2022-06-08 at 12.13.29 PM.png style="width:100%">
-<img src= images/Screen Shot 2022-06-08 at 12.13.37 PM.png style="width:100%">
+<img src= images/chart2.png style="width:100%">
+<img src= images/chart1.png style="width:100%">
 
 ## Room for Improvement
 
