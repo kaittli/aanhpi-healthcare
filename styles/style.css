@@ -156,7 +156,7 @@ nav ul#main_menu li:hover::after{
     grid-template-rows: auto;
     grid-template-areas: "buttonsTitle" "buttonContainer" "panelTitle" "pieCharts" "extraTitle" "extraStuff";
     margin: 15px 15px;
-    gap: 20px;
+    gap: 10px;
     height: 20vh;
     align-items: center;
     justify-items: center;
@@ -167,16 +167,15 @@ nav ul#main_menu li:hover::after{
     font-family: 'Cabin', sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 1em;
+    font-size: 0.75em;
     text-align: center;
-    padding-bottom: 1em;
-    padding-top: 1em;
+    padding-bottom: 0.5em;
 }
 
 #buttonContainer{
     display: grid;
     grid-area: buttonContainer;
-    gap: 20px;
+    gap: 5px;
 }
 
 .careButton{
@@ -195,9 +194,10 @@ nav ul#main_menu li:hover::after{
     font-family: 'Cabin', sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 1em;
+    font-size: 0.75em;
     align-self: center;
     justify-self: center;
+    text-align: center;
     grid-area: panelTitle;
 }
 
@@ -205,21 +205,20 @@ nav ul#main_menu li:hover::after{
     grid-area: pieCharts;
     display: grid;
     grid-template-areas: "chartTreatment";
-    gap: 10px;
-    padding-bottom: 2em;
+    padding-bottom: 0.5em;
 }
 
 #chartTreatmentContainer{
     grid-area: chartTreatment;
     position: relative;
-    height: 20vh;
+    height: 10vh;
 }
 
 #extraTitle{
     font-family: 'Cabin', sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 1em;
+    font-size: 0.75em;
     align-self: center;
     justify-self: center;
     grid-area: extraTitle;
@@ -245,7 +244,7 @@ nav ul#main_menu li:hover::after{
     padding: 16px 32px;
     text-align: center;
     display: inline-block;
-    font-size: 16px;
+    font-size: 0.75em;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
