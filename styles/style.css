@@ -211,7 +211,6 @@ nav ul#main_menu li:hover::after{
 #chartTreatmentContainer{
     grid-area: chartTreatment;
     position: relative;
-    height: 10vh;
 }
 
 #extraTitle{
