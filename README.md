@@ -39,12 +39,12 @@ This website may be repurposed for other ethical issues where there is a focus o
 This mapplication can be used to learn about the sentiments and stories of UCLA students who have visited the Ashe Center or other nearby medical faciltiies. The UCLA student population and associated organizations such as UC Leadership and the Student Health Committee can explore the mapplication to be educated of experiences with medical care on or around UCLA’s campus. Through gaining this first-hand information, it can lead to subsequent discussions on potential changes to be implemented within the Ashe Center’s procedures and allow individuals in need of medical care to make informed decisions. Vulnerable student populations through this project may use this project as a platform to advocate for improved accessibility and flexibility pertaining to health care services related to the Ashe Center. 
 
 ## Screenshots of Features of the website 
-1. Home Page
-Our home page contains our main panel, showcasing our mapplication along with buttons and piecharts that are conditional based on what you are interested in seeing! Specifically, our map has individual markers that when clicked, popup with survey information as well as a cluster marker that provides the ability to view multiple markers in one location. Our control panel can filter criteria to swap information that you are interested in seeing and also contains a button that links to another page with anonymized information. 
+1. Home Page: Our home page contains our main panel, showcasing our mapplication along with buttons and piecharts that are conditional based on what you are interested in seeing! Specifically, our map has individual markers that when clicked, popup with survey information as well as a cluster marker that provides the ability to view multiple markers in one location. Our control panel can filter criteria to swap information that you are interested in seeing and also contains a button that links to another page with anonymized information. 
 <img src=images/mapplication.png style="width:100%">
 
-2. Response Page
-Our response page contains two charts, the one on top contains responses relevant to the Ashe Center while the one on the bottom contains responses pertaining to other medical centers nearby.
+2. Response Page: Our response page contains two charts, the one on top contains responses relevant to the Ashe Center while the one on the bottom contains responses pertaining to other medical centers nearby.
+<img src= images/Screen Shot 2022-06-08 at 12.13.29 PM.png style="width:100%">
+<img src= images/Screen Shot 2022-06-08 at 12.13.37 PM.png style="width:100%">
 
 ## Room for Improvement
 
