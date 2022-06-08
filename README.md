@@ -3,18 +3,17 @@
 By Antony Lin and Kaitlyn Li
 
 ## Table of Contents
-* [Objective] (#objective)
-* [Community Empowerment] (#empowerment)
-* [Technical tools Utilized] (#technology)
-* [Technical and Ethical Problems] (#problems)
-* [Website Repurposement] (#repurposement)
-* [Long-Term Impact] (#impact)
-* [Features of Our Website] (#features)
-* [Room for Improvement] (#improvement)
-* [Acknowledgements] (#acknowledgements)
-* [Contact] (#contact)
+* Objective
+* Community Empowerment
+* Technical tools Utilized
+* Technical and Ethical Problems
+* Website Repurposement
+* Long-Term Impact
+* Features of Our Website
+* Room for Improvement
+* Acknowledgements
+* Contact
 
-<a name="objective"></a>
 ## Objective
 
 Healthcare accessibility has been a longstanding issue among college students. Our mapplication aims to learn about the UCLA student population’s experiences regarding medical care while at UCLA, including on-campus and off-campus institutions. On campus, the focus is on visits through the Ashe Center, which is UCLA’s main treatment center that offers a variety of student health services. In doing so, we hope to discover more about potential struggles with seeking medical attention as a UCLA student, especially in relation to accessibility, flexibility, and the potential influence of different healthcare plans. 
