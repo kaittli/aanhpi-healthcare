@@ -4,11 +4,27 @@
 
 ## Table of Contents
 
+- Mapplication Features
 - What social problem is being addressed?
 - Who is being empowered by your mapplication?
 - What technical and ethical problems could there be in developing this tool?
 - What technology is used by this project?
 - How others can use this project in the future
+
+## Mapplication Features
+
+- Map
+  - Individual markers
+    - Popups with survey response information
+  - Cluster markers
+    - Ability to view multiple markers in one location
+    - Popups with survey response information
+  - Zoom-in and zoom-out capability
+  - Ability to filter out markers based upon specific criteria
+- Control panel
+  - Buttons to swap out marker and cluster marker popup information as well as filtering criteria
+  - Pie charts demonstrating aggregated response information that change with the buttons
+  - Link to additional information that may not be present in marker and cluster marker popups (anonymized)
 
 ## What social problem is being addressed? 
 
