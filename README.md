@@ -48,7 +48,7 @@ Our response page contains two charts, the one on top contains responses relevan
 
 ## Room for Improvement
 
-This project can also be added onto in the future with goals improving the map interactivity. Rather than popups for each marker, perhaps opening up modals for each experience would be more impactful. Another idea would be including word clouds for experiences once the site obtains more and more responses—it could show what similarities in experiences may exist among individuals. We also would like to eventually make changes to our cluster marker so that the purpose is more distinguishable. Additionally, the code behind the scenes can be optimized and ordered somewhat better.
+This project can also be added onto in the future with goals improving the map interactivity. Rather than popups for each marker, perhaps opening up modals for each experience would be more impactful. Another idea would be including word clouds for experiences once the site obtains more and more responses—it could show what similarities in experiences may exist among individuals. We also would like to eventually make changes to our cluster marker so that the purpose is more distinguishable. Additionally, we also hope to be able to make the pie charts trigger the markers in our map somehow in the future.
 
 ## Acknowledgements
 
