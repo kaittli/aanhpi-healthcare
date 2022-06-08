@@ -1,4 +1,4 @@
-# aanhpi-healthcare
+# The Ashe Project: An AAS-191A Work by Cute as Health (Antony Lin & Kaitlyn Li)
 
 <img src=images/mapplication.png style="width:100%">
 
