@@ -1,5 +1,6 @@
 # aanhpi-healthcare
 
+<img src=images/mapplication.png style="width:100%">
 
 # What social problem is being addressed? 
 
