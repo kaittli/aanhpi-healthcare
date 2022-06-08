@@ -2,6 +2,16 @@
 
 <img src=images/mapplication.png style="width:100%">
 
+# Table of Contents
+
+<li>
+  <ul>What social problem is being addressed?</ul>
+  <ul>Who is being empowered by your mapplication? </ul>
+  <ul>What technical and ethical problems could there be in developing this tool?</ul>
+  <ul>What technology is used by this project?</ul>
+  <ul>How others can use this project in the future</ul>
+  
+
 # What social problem is being addressed? 
 
 Healthcare accessibility has been a longstanding issue among college students. Our mapplication aims to learn about the UCLA student population’s experiences regarding medical care while at UCLA, including on-campus and off-campus institutions. On campus, the focus is on visits through the Ashe Center, which is UCLA’s main treatment center that offers a variety of student health services. In doing so, we hope to discover more about potential struggles with seeking medical attention as a UCLA student, especially in relation to accessibility, flexibility, and the potential influence of different healthcare plans. 
@@ -18,6 +28,6 @@ Healthcare issues can be very personal, so there may not be as much detail in th
 
 For this project we will be employing different tools such as Leaflet and papaparse to create our map as well as to import our community data into our project. To collect our data, we are utilizing a survey that we have created through Google Forms and PapaParse for JavaScript to parse our collected data. Additionally, we are using HTML, CSS, and Javascript to construct and style our website. 
 
-# How others can use this project in the future.
+# How others can use this project in the future
 
 This mapplication will allow the UCLA student population and associated organizations such as UC Leadership and the Student Health Committee to be educated of experiences with medical care on or around UCLA’s campus. Through gaining this first-hand information, it can lead to subsequent discussions on potential changes to be implemented within the Ashe Center’s procedures and allow individuals in need of medical care to make informed decisions. Vulnerable student populations through this project may use this project as a platform to advocate for improved accessibility and flexibility pertaining to health care services related to the Ashe Center. 
