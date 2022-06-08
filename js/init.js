@@ -50,6 +50,8 @@ let noAsheBefore = 0;
 let yesUCSHIP = 0;
 let noUCSHIP = 0;
 
+let firstChart
+
 let circleOptions = {
     radius: 6,
     fillColor: "#ff7800",
@@ -167,11 +169,17 @@ function addMarker(data){
     }
     else{
         // 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
-        // step 1 make sure you add all the right data that you need for the popup (addCorrectPopup)
+        // step 1 make sure you add all the right data that you need for the popup
         // 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
+        console.log('ash Sat:!!!!!!!!!!!!!!!')
+        // console.log(data)
+        console.log(data['Are you satisfied with the quality of care you have received from the Ashe Center? '])
         let fullData = {
+            ashSat: data['Are you satisfied with the quality of care you have received from the Ashe Center? '],
+            ashWhy: data['Why or why not?'],
             ashExp: data['If you feel comfortable, could you describe your experience(s) seeking out medical attention at the Ashe Center?'],
-            ashReason: data['Is there a reason why you have not sought out medical treatment at the Ashe Center?'],
+            ashUCSHIP: data['Are you covered by UCSHIP or BruinCare?'],
+            ashFac: data['Do you think that having UCSHIP and/or BruinCare has facilitated your access to the Ashe Center? Why or why not?']
         }
         console.log("ashe")
         asheCare.addLayer(L.circleMarker([34.0714005805055,-118.444727043983],{circleOptions:fullData}))
@@ -306,22 +314,23 @@ function processData(results){
 // 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
 // step 2 bind the right pop-up depending filter!!!!!!!!!!!!!!!!!
 // 🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅🐅
-function addCorrectPopup(filter="firstChart"){
+function addCorrectPopup(filter="extent"){
+    console.log("addcorrect")
     asheCare.getLayers().forEach(individualMarker => filterPopupOnChartClick(individualMarker, filter))
 }
 
-
 function filterPopupOnChartClick(popupInCluster,filter){
-    console.log(popupInCluster)
+    
     switch (filter){
-        
-        case "firstChart":
-            popupInCluster.bindPopup(`<p>Type of Treatment: ${popupInCluster.options.circleOptions.ashExp}</p>`)
+        case "extent":
+            popupInCluster.bindPopup(`<p>Satisfied with Ashe Care: ${popupInCluster.options.circleOptions.ashSat}<br/>Why or Why Not: ${popupInCluster.options.circleOptions.ashWhy}</p>`)
+            
             break;
-        case "secondChart":
-            popupInCluster.bindPopup(`<p>Previously Received Care at the Ashe Center: ${popupInCluster.options.circleOptions.ashReason}</p>`)
+        case "visits":
+            popupInCluster.bindPopup(`<p>Experience with Care at Ashe: ${popupInCluster.options.circleOptions.ashExp}</p>`)
             break;
-        case "thirdChart":
+        case "coverage":
+            popupInCluster.bindPopup(`<p>UCSHIP/BruinCare Coverage: ${popupInCluster.options.circleOptions.ashUCSHIP}<br/>Whether or Not UCSHIP/BruinCare has Facilitated Access to Ashe: ${popupInCluster.options.circleOptions.ashFac}</p>`)
             break;
     }    
 }
@@ -341,7 +350,6 @@ function removeMapLayers(){
     if (allCareLayers != undefined){
         allCareLayers.removeLayer()
         map.removeControl(legendForExtentCare);
-        
         //legendForExtentCare.addTo(map)
         //L.control.layers(null,extentCareLayers).removeFrom(map)
     }
@@ -355,7 +363,6 @@ function removeMapLayers(){
     if (allCoverageLayers != undefined){
         allCoverageLayers.removeLayer()
         map.removeControl(legendForCoverage);
-        
         //legendForCoverage.addTo(map)
         //L.control.layers(null,coverageLayers).removeFrom(map)
     }
@@ -377,18 +384,20 @@ function filterCharts(e){
         case "extent":
             addTreatmentChart()
             allCareLayers.addTo(map) //add legend afterwards
-            
+            addCorrectPopup('extent')
             break;
         case "visits":
             addAsheChart()
             allVisitedAsheLayers = L.featureGroup([yesAsheLayer,noAsheLayer,asheVisits])
             allVisitedAsheLayers.addTo(map)
+            addCorrectPopup('visits')
             map.fitBounds(allVisitedAsheLayers.getBounds())
             break;
         case "coverage":
             addUCSHIPChart()
             allCoverageLayers = L.featureGroup([yesCoverageLayer,noCoverageLayer,asheCoverage])
             allCoverageLayers.addTo(map)
+            addCorrectPopup("coverage")
             map.fitBounds(allCoverageLayers.getBounds())
             break;
     }
@@ -419,7 +428,7 @@ function addEventListeners(){
         if (allCoverageLayers != undefined){
             map.removeLayer(allCoverageLayers)
         }
-        if (allvisitedAsheLayers!= undefined){
+        if (allVisitedAsheLayers!= undefined){
             map.removeLayer(allVisitedAsheLayers)
         }
         map.addLayer(asheCare)
@@ -436,7 +445,7 @@ function addEventListeners(){
             map.removeLayer(allCareLayers)
             map.addLayer(asheCare)
         }
-        if (allcoveraCeLayers != undefined){
+        if (allCoverageLayers != undefined){
             map.removeLayer(allCoverageLayers)
             map.addLayer(asheCare)
         }
@@ -454,7 +463,7 @@ function addEventListeners(){
             map.removeLayer(allCareLayers)
             map.addLayer(asheCare)
         }
-        if (allvisitedAsheLayers!= undefined){
+        if (allVisitedAsheLayers!= undefined){
             map.removeLayer(allVisitedAsheLayers)
             map.addLayer(asheCare)
         }      
