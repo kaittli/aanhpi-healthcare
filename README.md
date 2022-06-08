@@ -4,16 +4,16 @@ By Antony Lin and Kaitlyn Li
 
 ## Table of Contents
 
-1. [Objective] (#objective)
-2. [Community Empowerment] (#empowerment)
-3. [Technical tools Utilized] (#technology)
-4. [Technical and Ethical Problems] (#problems)
-5. [Website Repurposement] (#repurposement)
-6. [Long-Term Impact] (#impact)
-7. [Features of Our Website] (#features)
-8. [Room for Improvement] (#improvement)
-9. [Acknowledgements] (#acknowledgements)
-10. [Contact] (#contact)
+* [Objective] (#objective)
+* [Community Empowerment] (#empowerment)
+* [Technical tools Utilized] (#technology)
+* [Technical and Ethical Problems] (#problems)
+* [Website Repurposement] (#repurposement)
+* [Long-Term Impact] (#impact)
+* [Features of Our Website] (#features)
+* [Room for Improvement] (#improvement)
+* [Acknowledgements] (#acknowledgements)
+* [Contact] (#contact)
 
 ## Objective
 
