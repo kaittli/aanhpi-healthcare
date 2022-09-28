@@ -1,4 +1,4 @@
-# The Ashe Project presented by Cute As Health
+# The Ashe Project
 
 Visit the Website!
 https://kaittli.github.io/aanhpi-healthcare/index.html
